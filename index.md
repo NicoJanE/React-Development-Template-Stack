@@ -38,5 +38,5 @@ The containers are **maintained only here**. After creation or updating of the c
 
 
 > *Remark:*{: style="color: Grey;font-size:13px; "} 
-> <small>Of course, you may change the container docker templates files for specific reasons but do this than in the specific project folder! When a change is generic it should be added (merged) into the development container here</small>
+> <small>Of course, you may change the container docker templates files for specific reasons but do this than in the specific project folder! When a change is generic it should be added (merged) into the development container here </small>
 
