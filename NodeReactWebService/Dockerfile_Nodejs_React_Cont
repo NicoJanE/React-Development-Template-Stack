@@ -1,0 +1,27 @@
+# Base image nodejs React.
+#
+#	VERSION issues
+#	Versions: 14, 15 un-comment 'RUN npm install'
+#  	Versions: 16, 18, 20  and up. for these versions 'RUN npm install' needs to be commented
+FROM node:16
+
+WORKDIR /projects
+# COPY . .
+
+# Perhaps update here (TODO)
+# RUN npm install
+#
+
+
+# ***** These instructions additional packages *** !!!
+# INSTALL some required software -y makes sure defaults are applied during installation (always run apt-get update 1e )
+RUN apt-get update && \
+    apt-get install -y nano && \
+	apt install net-tools -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+
+# Expose ports (Don't put behind the port on same line = error!)
+EXPOSE 3001
+

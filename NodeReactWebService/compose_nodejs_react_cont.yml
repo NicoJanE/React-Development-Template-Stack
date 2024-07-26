@@ -1,0 +1,28 @@
+# Un-comment the 'version' field if you get an 'unsupported Compose file version: 1.0' ERROR
+# version: '3.8'
+
+networks:
+  react_network:                          # Define a network
+
+volumes:
+  react-vol:
+
+  
+services:               
+    webserver-nodejs-react2:                     #  Our Apache web server with install PHP and PHP-FPM
+        build:
+            context: .  
+            dockerfile: Dockerfile_Nodejs_React_Cont
+        image: eelhart/react-base:latest2        # This name can be used to extend or chain this image.
+        ports:
+            - target: 3001                      # Container Port used internally in the Docker container.
+              published: 3002                   # Host Port to access from external.    
+        networks:    
+            - react_network                     # Use this Network
+        volumes:
+#            - ./projects:/projects             # Bind mount Gave huge problems (directories not created ...)  
+            - react-vol:/volume-share           # Alternative volume mount
+        command: ["/bin/sh", "-c", "while sleep 1000; do :; done"] # Run shell so we can enter a terminal session
+
+# To Start this container:
+# docker-compose -f compose_nodejs_react_cont.yml up -d --build --force-recreate
