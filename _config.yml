@@ -16,6 +16,13 @@ kramdown:
   parse_block_html: true        # This is required to enable <details>  in combination with markdown syntax in it!
                                 # Because the Details tag is very picky with indention syntax here a working example
                                 # (Remove the first # to use this as example in your MD code)        
+                                
+# Used for discussion link
+repository_owner: NicoJanE      # kind of fixed
+repository_name: React-Development-Template-Stack     # Update this(repository name) if discussions are enabled in GitHub. When Empty it will state 'no Discussions'
+
+
+
 # EXAMPLE                                
 #<details>  
 #  <summary>More information about ...
