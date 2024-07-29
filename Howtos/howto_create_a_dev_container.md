@@ -132,7 +132,7 @@ If you omit this step the default will be used (see variable:PRJ_NAME_ARG in the
 ``` docker  compose -f compose_default_project.yml up -d  --remove-orphans --build --force-recreate ``` <br><br>
 ### Setup result & possible customization's
 After that you can open a terminal session in your container and you should fine your project at: **/projects/prjtype/[my-project]** <br>
-- The nodeJs server is automatic started with your new created project, In the host you can surf to: **http://localhost:3001/** The port can be changed (see next) <br>
+- The nodeJs server is automatic started with your new created project, In the host you can surf to: **http://localhost:3002/** The port can be changed (see next) <br>
 - In the (container) file: **/projects/prjtype/[my-project]/.env** You can find the used variables, one of them is the **HOST** variable, the value 0.0.0.0 indicates that the site is available from any host, thus also our host, defining localhost as value, will have the result that the site is not available from the (Windows) host. 
 - Also the **CONTAINER PORT** variable can be found in the **.env** file change this if you want(no direct need to), and restart the container <br>
 - You need to using a different **HOST PORT**? If this is required you need the change the published port in the base compose file: **compose_nodejs_react_cont.yml**, stop the container and start it  with: ``docker-compose -f compose_default_project.yml up -d`` <br><br> *Warning!*{: style="color: red;font-size:13px; "} <small>When you try to restart with Docker Desktop, it will use the old host port!</small> <br>
