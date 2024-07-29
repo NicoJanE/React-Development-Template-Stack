@@ -9,7 +9,7 @@ volumes:
 
   
 services:               
-    webserver-nodejs-react2:                     #  Our Apache web server with install PHP and PHP-FPM
+    webserver-nodejs_22-react:                     #  Our Apache web server with install PHP and PHP-FPM
         build:
             context: .  
             dockerfile: Dockerfile_Nodejs_React_Cont

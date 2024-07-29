@@ -2,7 +2,7 @@
 #
 
 title: <font size="6"><span style="color:#FFD700">D</span>ocker <span style="color:#FFA500">T</span>emplate <span style="color:#FF7F50">S</span>tack React </font>
-description: <b><i><font size="3">A Docker container for React projects</span></font></i></b>
+description: <b><i><font size="3">A DTS container for React projects</span></font></i></b>
 
 show_downloads: true
 google_analytics:

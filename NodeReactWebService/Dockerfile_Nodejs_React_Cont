@@ -1,9 +1,20 @@
 # Base image nodejs React.
 #
 #	VERSION issues
-#	Versions: 14, 15 un-comment 'RUN npm install'
-#  	Versions: 16, 18, 20  and up. for these versions 'RUN npm install' needs to be commented
-FROM node:16
+#	Versions: 14, 15 un-comment 'RUN npm install'  		# Odd versions are not intended for release and development
+#  	Versions: 16, 18, 20,22  and up. for these versions 'RUN npm install' needs to be commented
+
+# Test against the following Node.js versions:
+# (Don't leave comments at the end of the line = build error
+#
+# FROM node:16		# => Tested successful (July 2024)
+# FROM node:18		# => Tested successful (July 2024)
+# FROM node:20   	# => Tested successful (July 2024)
+# FROM node:22  	# => Tested successful (July 2024)
+#
+# Default is the latest LTS version (as of July '24)
+FROM node:22
+
 
 WORKDIR /projects
 # COPY . .

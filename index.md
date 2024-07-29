@@ -13,7 +13,13 @@ _This source code is licensed under the MIT License found in the  'LICENSE.md' f
 
 # What
 This is an Docker template container for **React** development, of different projects, it contains:
-- Nodjes (required for React)
+- Nodjes (required for React) supported and tested versions (July '24)
+	- Node.js version 16
+	- Node.js version 18
+	- Node.js version 20
+	- Node.js version 22 (**default**) <br>
+	<sup>\*To change the version update the **'FROM node'** in ***Dockerfile_Default_project_Cont*** 
+	
 - React it self
 - Project specific Docker compose files, to create different types of start-up projects 
 
