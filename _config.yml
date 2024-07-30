@@ -25,7 +25,11 @@ kramdown:
 repository_owner: NicoJanE      # kind of fixed
 repository_name: React-Development-Template-Stack     # Update this(repository name) if discussions are enabled in GitHub. When Empty it will state 'no Discussions'
 
-
+# includes home links for this page, leave blank in case of no Home links. 
+home_site_name: 
+    - DTS
+home_site_url: 
+    - https://nicojane.github.io/Docker-Template-Stacks-Home
 
 # EXAMPLE                                
 #<details>  
