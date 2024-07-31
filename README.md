@@ -11,14 +11,16 @@ This is a **Docker development container for React**  template, it contains:
 - React it self
 - Project specific Docker compose files, to create and start projects 
 
-You can use this container to start programming in your local environment for development and testing purposes. For the rest of the documentation open the [index](./index) file.
+You can use this container to start programming in your local environment for development and testing purposes. For the rest of the documentation open [this page](https://nicojane.github.io/React-Development-Template-Stack/)
 
+<sub> &nbsp;&nbsp;&nbsp;&nbsp; *Is this a local repository project? Then use this local link [main page](./index) file. <sub>
+<br><br>
 
 
 <details closed>  
   <summary class="clickable-summary">
   <span  class="summary-icon"></span> 
-  **Side note:** Preview the markdown files(.md)
+  Side note: Preview the markdown files(.md)
   </summary> 	<!-- On same line is failure, Don't indent the following Markdown lines!  -->
 
 > <br>
