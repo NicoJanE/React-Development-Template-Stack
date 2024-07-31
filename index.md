@@ -26,7 +26,7 @@ This is an Docker template container for **React** development, of different pro
 You can use container to start programming in your local container for development and test purpose.
 
 # Where more information
-1. To create and run a development container document: open [how to create a development container](./Howtos/howto_create_a_dev_container) 
+1. To create and run a development container document: open [how to create a development container](./Howtos/howto_create_a_dev_container) in the Howtos sub directory.
 
 
 <details closed>  
