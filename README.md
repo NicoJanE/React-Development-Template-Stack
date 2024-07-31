@@ -1,12 +1,12 @@
 
 
 # What
-This is a **Docker Template Stack container for React projects**. It consists of:
+This is a **Docker Template Stack container(DTS) for React projects**. It consists of:
 - Node.js (required for React)
 - React it self
 - Project specific Docker compose files, to create and start projects 
 
-You can use this container to start programming in your local environment for development and testing purposes. For the rest of the documentation open [this page](https://nicojane.github.io/React-Development-Template-Stack/)
+You can use this container to start programming in your local environment for development and testing purposes. For the rest of the documentation open the [main documentation page](https://nicojane.github.io/React-Development-Template-Stack/). Other DTS containers can be found [here](https://nicojane.github.io/Docker-Template-Stacks-Home/)
 
 <sub> &nbsp;&nbsp;&nbsp;&nbsp; *Is this a local repository project? Then use this local link [main page](./index) file. <sub>
 <br><br>
