@@ -1,7 +1,7 @@
 
 
 # What
-This is a **Docker development container for React**  template, it contains:
+This is a **Docker Template Stack container for React projects**. It consists of:
 - Node.js (required for React)
 - React it self
 - Project specific Docker compose files, to create and start projects 
