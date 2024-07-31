@@ -35,5 +35,7 @@ You can use this container to start programming in your local environment for de
 >- Alternatively, you can click the 'Open Preview to the Side' button at the top right. 
 >
 ><br>
-***[Click here for more information on the Markdown Preview GitHub Styling plugin](https://github.com/mjbvz/vscode-github-markdown-preview-style)***
+<a href="https://github.com/mjbvz/vscode-github-markdown-preview-style" target="_blank">Click here for more information on the Markdown Preview GitHub Styling plugin</a>
 </details>
+
+
