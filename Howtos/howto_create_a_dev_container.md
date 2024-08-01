@@ -5,6 +5,7 @@ RefPages:
 --- 
 
 <small>
+<br><br>
 _This file is part of: **React Development Template Stack**_
 _Copyright (c) 2024 Nico Jan Eelhart_
 _This source code is licensed under the MIT License found in the  'LICENSE.md' file in the root directory of this source tree._
