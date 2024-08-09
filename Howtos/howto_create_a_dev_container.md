@@ -112,7 +112,9 @@ docker-compose -f compose_nodejs_react_cont.yml up -d --build --force-recreate
 
 
 ### Setup Result
-After running this command, you can open a terminal session in the container. By default, you should be in the ***projects*** directory (pwd), and it should be empty (ls). If it is not empty, you may be experiencing caching issues!
+After running this command, you can open a terminal session in the container. By default: - you should be in the ***projects*** directory (pwd), 
+- This directory should be empty (ls). If it is not empty, you may be experiencing caching  issues!
+- In the root of the **container** a directory **'shared-host'** is available which is mapped to the **host** in the directory: **NodeReactWebService\shared-host**. Use this to exchange files or create backup of your project (Example: `cp -r /projects/nextjs/myproject /shared-host)
 
 --- 
 
@@ -121,8 +123,7 @@ This section includes several Dockerfile and Docker Compose combinations that yo
 
 
 > *Warning!*{: style="color: red;font-size:13px; "} <br>
-> By default you can onl;y start one NPN server with a project this means that only the last project created will be run with NPN. This can be changed using 
-for example, **npn-run-all** or using a **Process Manager**. At the moment tis is **not** part of this stack!
+> By default you can only start one NPN server with a project this means that only the last project created will be run with NPN. This can be changed using for example, **npn-run-all** or using a **Process Manager**. At the moment this is **not** part of this stack!
 <br>
 <br>
 > 
@@ -177,3 +178,4 @@ to create a project:
 - You should be able to open the browser in the host with this (change to your port)
 ``` http://localhost:3096/```
 And the "React Template Website" should be displayed!
+- In case something seems to be off first try to restart the Docker container!

@@ -4,8 +4,6 @@
 networks:
   react_network:                          # Define a network
 
-volumes:
-  react-vol:
 
   
 services:               
@@ -20,8 +18,8 @@ services:
         networks:    
             - react_network                     # Use this Network
         volumes:
-#            - ./projects:/projects             # Bind mount Gave huge problems (directories not created ...)  
-            - react-vol:/volume-share           # Alternative volume mount
+#            - ./projects:/projects             # Bind mount Gave huge problems for project files (directories not created ...) 
+            - ./shared-host:/shared-host        # Bind mount for shared files between host <> container for backups and others
         command: ["/bin/sh", "-c", "while sleep 1000; do :; done"] # Run shell so we can enter a terminal session
 
 # To Start this container:
