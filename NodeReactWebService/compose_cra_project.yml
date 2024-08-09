@@ -19,19 +19,26 @@ volumes:
   react-vol:
 
 services:
-  webserver-nodejs_22-react:                 # Same name as base file!
+  webserver-nodejs_22-react:                # Same name as base file!
     extends: 
-      file: compose_nodejs_react_cont.yml    # our base compose file, see NOTE 1
-      service: webserver-nodejs_22-react     # Same name as base file!
+      file: ./compose_nodejs_react_cont.yml # our base compose file, see NOTE 1
+      service: webserver-nodejs_22-react    # Same name as base file!
+#    env_file:                              # THIS horrible feature does not work with sub directories or/and alternative names
+#      - ./a.env                            # Forget about it, it just DONT work! See Remark 1 in the file: .env
+    ports:
+        - "${PORT}:${PORT}"                 # First host second container
     build:
       context: .
-      dockerfile: Dockerfile_Default_project_Cont
+      dockerfile: Dockerfile_CRA_project_Cont
       args:
         PRJ_NAME_ARG: ${PRJ_NAME_ARG}
         PRJ_BASE_ARG: ${PRJ_BASE_ARG}
         PRJ_TYPE_ARG: ${PRJ_TYPE_ARG}
+        PORT: ${PORT}
     environment:
-       - PRJ_BASE=${PRJ_BASE}
+#       - PRJ_BASE=${PRJ_BASE_ARG}    
+        - PORT=${PORT}                      # Pass variable from .env to PORT (1e), this is available in the container(ENV) 
+                                            # In dockerfile it is available during building after defining it as: 'ARG PORT' in the docker file
     image: eelhart/react-base:latest2       # This name can be used to extend or chain this image.
     working_dir: ${PRJ_BASE_ARG}/$PRJ_NAME_ARG
     volumes:
@@ -49,7 +56,10 @@ services:
 # Alternative first build ben run
 # docker-compose -f compose_default_project.yml build --no-cache
 # docker-compose -f compose_default_project.yml up -d --remove-orphans --force-recreate
+# docker compose -f ./Create-Projects/CRA/compose_cra_project.yml up -d --remove-orphans --build --force-recreate
 
+# docker compose -f compose_cra_project.yml up -d --remove-orphans --build --force-recreate
+#                   compose_cra_project.yml
 
 # Handies               
 # docker system prune -a --volumes 

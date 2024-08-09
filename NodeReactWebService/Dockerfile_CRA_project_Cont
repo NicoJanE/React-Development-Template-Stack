@@ -12,17 +12,22 @@ FROM eelhart/react-base:latest2
 # Set the working directory
 WORKDIR /projects
 
-# Set arguments
-ARG PRJ_NAME_ARG=${PRJ_NAME_ARG}			# REQUIRED
+# Set arguments, made available via our compose file
+ARG PRJ_NAME_ARG
 ARG PRJ_BASE_ARG
-ARG PRJ_BASE_ARG=${PRJ_BASE_ARG}			# REQUIRED
 ARG PRJ_TYPE_ARG
-ARG PRJ_TYPE_ARG=${PRJ_TYPE_ARG}			# REQUIRED
+
+# Define build-time argument with default value
+ARG PORT_ARG
+
+# Use the build argument as an environment variable available at runtime
+ENV PORT=${PORT_ARG}
+EXPOSE ${PORT}
 
 # Use the shell form explicitly to ensure environment variable expansion
 RUN echo "Project Name 1: ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}"
 RUN /bin/sh -c "mkdir -p ${PRJ_BASE_ARG}"
-RUN echo "Project Name:$PRJ_BASE_ARG/${PRJ_NAME_ARG}"    # Make sure this environment variable is set! ( 
+RUN echo "Using port(Container and host):${PORT_ARG}" 
 
 
 # Installs the npc tool globally on your system, don't think it needed (right?)

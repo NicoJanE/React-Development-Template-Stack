@@ -15,13 +15,11 @@
 # Default is the latest LTS version (as of July '24)
 FROM node:22
 
+#  Ensures non-interactive behavior, caries over to chained docker files (NJE)
+ENV CI=true
 
 WORKDIR /projects
 # COPY . .
-
-# Perhaps update here (TODO)
-# RUN npm install
-#
 
 
 # ***** These instructions additional packages *** !!!
@@ -32,7 +30,31 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Update npm JavaScript package manager to latest version
+RUN npm update
+
+# Update a depended npm package. See remark 1 at the bottom of this file.
+RUN npm install -g corepack@latest
+
+# Next.js Support. Install the 'create-next-app' Package (next.js) package globally
+RUN npm install -g create-next-app@latest
 
 # Expose ports (Don't put behind the port on same line = error!)
 EXPOSE 3001
 
+
+# compose_cra_project                 mv ./NodeReactWebService/compose_default_project.yml  ./NodeReactWebService/compose_cra_project
+# Dockerfile_CRA_project_Cont		  mv ./NodeReactWebService/Dockerfile_Default_project_Cont  ./NodeReactWebService/Dockerfile_CRA_project_Cont
+#
+# compose_next_project
+# Dockerfile_NEXT_project_Cont
+#
+# npx create-next-app my-nextjs-app --typescript --tailwind --src-dir --app --import-alias --eslint "@/components"
+# 
+
+
+# Remark 1:
+# 			One can use the command: 'npm list -g --depth=0' 
+#
+# 			to check which globally installed npm packages are installed
+# 			this can be handy in case you need to update

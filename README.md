@@ -1,12 +1,12 @@
 
 
 # What
-This is a **Docker Template Stack container(DTS) for React projects**. It consists of:
+This is a **Docker Template Stack container (DTS) for React projects**. It consists of:
 - Node.js (required for React)
 - React it self
-- Project specific Docker compose files, to create and start projects 
+- Project-specific Docker Compose files to create and start projects.
 
-You can use this container to start programming in your local environment for development and testing purposes. For the rest of the documentation open the [main documentation page](https://nicojane.github.io/React-Development-Template-Stack/). Other DTS containers can be found [here](https://nicojane.github.io/Docker-Template-Stacks-Home/)
+You can use this container to begin programming in your local environment for development and testing purposes. For the rest of the documentation, visit the [main documentation page](https://nicojane.github.io/React-Development-Template-Stack/). Other DTS containers can be found [here.](https://nicojane.github.io/Docker-Template-Stacks-Home/)
 
 <sub> &nbsp;&nbsp;&nbsp;&nbsp; *Is this a local repository project? Then use this local link [main page](./index) file. <sub>
 <br><br>
@@ -15,14 +15,14 @@ You can use this container to start programming in your local environment for de
 <details closed>  
   <summary class="clickable-summary">
   <span  class="summary-icon"></span> 
-  Side note: Preview the markdown files(.md)
+  Side note: Preview Markdown Files(.md)
   </summary> 	<!-- On same line is failure, Don't indent the following Markdown lines!  -->
 
 > <br>
 > 
-> ### Preview the markdown files(.md)
+> ### Preview Markdown Files(.md)
 >
->To preview the Markdown (MD) files in this project, one of the best solutions is to open these files in Visual Studio Code (VSC) and install the plugin: **Markdown Preview GitHub Styling** (Tested with version 2.04). Other plugins, or plugins for other programs, may not always work correctly with the file links in the documentation. I use the file link syntax supported by GitHub (Jekyll), which is also compatible with the above-mentioned plugin.
+>To preview the Markdown (.md) files in this project, one of the best solutions is to open these files in Visual Studio Code (VSC) and install the plugin: **Markdown Preview GitHub Styling** (Tested with version 2.04). Other plugins, or plugins for other programs, may not always work correctly with the file links in the documentation. I use the file link syntax supported by GitHub (Jekyll), which is also compatible with the above-mentioned plugin.
 >
 > To display the Preview screen in VSC: 
 >- Ensure that you are **not** working in ***Restricted mode***.

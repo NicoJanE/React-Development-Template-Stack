@@ -13,21 +13,31 @@ _This source code is licensed under the MIT License found in the  'LICENSE.md' f
 <br><br>
 
 # What
-This is an Docker template container for **React** development, of different projects, it contains:
-- Nodjes (required for React) supported and tested versions (July '24)
+This is a Docker template container for React development across different projects. It contains:
+- Node.js (required for React) supported and tested versions (as of July '24)
 	- Node.js version 16
 	- Node.js version 18
 	- Node.js version 20
 	- Node.js version 22 (**default**) <br>
-	<sup>\*To change the version update the **'FROM node'** in ***Dockerfile_Default_project_Cont*** 
+	<sup>*To change the version, update the 'FROM node' line in Dockerfile_Nodejs_React_Cont</sup>
 	
-- React it self
-- Project specific Docker compose files, to create different types of start-up projects 
+- React itself
+	- Next.js (preferred method to create React apps)
+- Project-specific Docker Compose files to create different types of start-up projects. Currently:<br><br>
+	- A project created with the legacy tool 'npx create-react-app' (CRA), known as the traditional React model, where rendering always occurs on the client. This tool offers many templates that can be used (you can indicate which to use in the .env file).
+		- **Configure:** ***.env***
+		- **Execute:** ***compose_cra_project.yml***
+	- A project created with Next.js, the now-preferred tool, using 'npx create-next-app'. This project is still a traditional React routing-based application (à la CRA), but this time it is based on our own template, which will give you a push in the right direction. Note that for this project, Next.js needs a specific configuration (which has been done in: **ClientRouter.js** )   
+		- **Configure:** ***.env***
+		- **Execute:** ***compose_nextjs_cust_cra_project.yml***
+	- Another project created with Next.js, but this time using the preferred Next.js routing method.
+		- **Configure:** ***TODO***
+		- **Execute:** ***TODO***
 
-You can use container to start programming in your local container for development and test purpose.
+You can use this container to start programming locally for development and testing purposes. I recommend opening the Docker container in Visual Studio Code and starting development from there.
 
-# Where more information
-1. To create and run a development container document: open [how to create a development container](./Howtos/howto_create_a_dev_container) in the Howtos sub directory.
+# Where to find more information
+To create and run a development container, open the [how to create a development container](./Howtos/howto_create_a_dev_container) guide in the Howtos subdirectory. This explains the basic installation of the React container and the additional projects that can be created.
 
 
 <details closed>  
