@@ -30,7 +30,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_CRA_project_Cont
-      args:
+      args:      
         PRJ_NAME_ARG: ${PRJ_NAME_ARG}
         PRJ_BASE_ARG: ${PRJ_BASE_ARG}
         PRJ_TYPE_ARG: ${PRJ_TYPE_ARG}

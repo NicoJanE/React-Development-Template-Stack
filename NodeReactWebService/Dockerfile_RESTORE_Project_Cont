@@ -1,0 +1,30 @@
+# Use a base image
+FROM eelhart/react-base:latest2
+
+# Define ARG variables
+# Environment variable set in .env file
+ARG PRJ_BASE_ARG_REST
+ENV PRJ_BASE_ARG_REST=${PRJ_BASE_ARG_REST} 
+ARG PORT
+ENV PORT=${PORT}
+EXPOSE ${PORT}
+ARG PRJ_TARGET_ARG_REST
+ENV PRJ_TARGET_ARG_REST=${PRJ_TARGET_ARG_REST}
+                 
+# Environment variable set by Power-shell script
+ARG PROJECT_TO_RESTORE
+ENV PROJECT_TO_RESTORE=${PROJECT_TO_RESTORE}
+
+RUN echo  "       --> Restore location: ${PROJECT_TO_RESTORE}   --> has been copied docker context directory: /TmpPrj to enable COPY command"
+RUN echo  "       --> New container target directory:${PRJ_BASE_ARG_REST}${PRJ_TARGET_ARG_REST}"
+RUN echo  "        --> Container using Port: ${PORT}"
+
+# Make sure the restored directory is copied to context (done be Power-Shell into directory: TmpPrj/)
+COPY TmpPrj/ ${PRJ_BASE_ARG_REST}${PRJ_TARGET_ARG_REST}/    
+
+# We need to install npm again(get the modules) and build the project
+WORKDIR ${PRJ_BASE_ARG_REST}${PRJ_TARGET_ARG_REST}/
+RUN npm install
+RUN npm run build
+
+

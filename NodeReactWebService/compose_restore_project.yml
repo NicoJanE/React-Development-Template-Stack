@@ -1,0 +1,53 @@
+# This file is part of: React Development Template Stack 
+# Copyright (c) 2024 Nico Jan Eelhart
+#
+# This source code is licensed under the MIT License found in the  'LICENSE.md' file in the root directory of this source tree.
+#
+#	Extending/Chaining 
+#
+#   Some notes regarding chaining:
+#   NOTE 1
+#   - Bind mounts don't carry over, you have to specify them again
+#   - same counts for network and pretty much all items
+#   - So better to use a common compose file and let the other compose files extend from items(like we done see extends: )
+
+networks:
+  react_network:                             # Define a network
+
+volumes:
+  react-vol:
+
+services:
+  webserver-nodejs_22-react:                # Same name as base file!
+    extends: 
+      file: compose_nodejs_react_cont.yml   # our base compose file, see NOTE 1
+      service: webserver-nodejs_22-react    # Same name as base file!
+    build:
+      context: .
+      dockerfile: Dockerfile_RESTORE_Project_Cont
+      args:
+        PRJ_BASE_ARG_REST: ${PRJ_BASE_ARG_REST}
+        PORT: ${PORT}
+        PROJECT_TO_RESTORE: ${PROJECT_TO_RESTORE}
+        PRJ_TARGET_ARG_REST: ${PRJ_TARGET_ARG_REST}
+        
+    ports:
+        - "${PORT}:${PORT}" # First host second container
+    image: eelhart/react-base:latest2       # This name can be used to extend or chain this image.
+    environment:
+        - PORT=${PORT}  # Pass variable from .env to PORT (1e), this is available in the container(ENV) and in dockerfile, during building after
+                        # defining: 'ARG PORT' in the docker file
+        
+    working_dir: ${PRJ_BASE_ARG_REST}/$PRJ_TARGET_ARG_REST
+    command: ["npm", "run", "dev"]         # Development start
+#    command: ["npm", "start"]             # Production start
+#    command: ["/bin/sh", "-c", "while sleep 1000; do :; done"]  # use this in case of err, let's you get in(CMD)
+
+# End compose file 
+
+
+
+# build with:
+#
+# docker  compose -f compose_restore_project.yml up -d  --remove-orphans --build --force-recreate 
+# Use: 'Restore_project.ps1' to execute

@@ -14,6 +14,7 @@ WORKDIR /projects
 
 # Set arguments, made available via our compose file
 ARG PRJ_NAME_ARG
+ENV PRJ_NAME_ARG=${PRJ_NAME_ARG}
 ARG PRJ_BASE_ARG
 ARG PRJ_TYPE_ARG
 
@@ -40,9 +41,15 @@ RUN echo "Using port(Container and host):${PORT_ARG}"
 
 # Create the React app
 WORKDIR ${PRJ_BASE_ARG}
+
 #RUN npx create-react-app ${PRJ_NAME_ARG} --template cra-template || (echo "Failed to create React app"; exit 1)
 RUN npx create-react-app ${PRJ_NAME_ARG} --template ${PRJ_TYPE_ARG}|| (echo "Failed to create React app"; exit 1)
+
+# Config information(port, host)
 COPY .env ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/.env
+
+# Visual Studio Code Settings
+COPY .vscode/ ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/.vscode/
 
 
 
