@@ -1,0 +1,78 @@
+
+# This file is part of: React Development Template Stack 
+# Copyright (c) 2024 Nico Jan Eelhart
+#
+# This source code is licensed under the MIT License found in the  'LICENSE.md' file in the root directory of this source tree.
+#
+
+# This requires that the base image is build(docker  compose -f compose_nodejs_react_cont.yml up -d)
+#	Extending/Chaining 
+#
+FROM eelhart/react-base:latest2
+
+# 1) Set the working directory
+WORKDIR /projects
+
+# 2) Set arguments, MAKE SURE the environment variables are assigned here (file:.env) so there available.
+ARG PRJ_NAME_ARG
+ENV PRJ_NAME_ARG=${PRJ_NAME_ARG}
+ARG PRJ_BASE_ARG
+ENV PRJ_BASE_ARG=${PRJ_BASE_ARG}
+
+# 3) Define build-time argument and use the build argument as an environment variable available at runtime
+ARG PORT_ARG
+ENV PORT=${PORT_ARG}
+EXPOSE ${PORT}
+
+# 4) Output to user the parameters which will be used (Use the shell form explicitly to ensure environment variable expansion)
+RUN echo "    - Next.js project Name: ${PRJ_BASE_ARG}/${PRJ_NAME_ARG} for a Next.js routed application"
+RUN /bin/sh -c "mkdir -p ${PRJ_BASE_ARG}"
+
+# 4.1) Remove the existing my-react-app directory if it exists. We don't want this. Docker will complain if directory exists.
+# RUN rm -rf $PRJ_BASE_ARG/${PRJ_NAME_ARG}
+
+# 5) Create the React application set (we remove the default created app later and copy in our own template app)
+WORKDIR ${PRJ_BASE_ARG}
+RUN npx create-next-app ${PRJ_NAME_ARG} --typescript --tailwind --src-dir --app --import-alias "@/components" --eslint || (echo "Failed to create React Next.js"; exit 1)
+#RUN npx create-next-app@latest ${PRJ_NAME_ARG} --example with-tailwindcss
+#RUN npx create-next-app@latest ${PRJ_NAME_ARG} --example cms-builder-io cms-builder-io-app
+#RUN npx create-next-app@latest ${PRJ_NAME_ARG} --example with-cloudinary nextjs-image-gallery
+
+# 6) Config information(port, host)
+COPY /.env ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/.env
+
+# 7) Visual Studio Code Settings
+COPY .vscode/ ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/.vscode/
+
+# 8) Install our on template project based on 'React Routing' (traditionally method)
+##
+## -- Install support for the traditionally react router method (for SPA, has components: BrowserRouter, Route,Switch, Link, Redirect)
+### RUN npm install react-router-dom@latest
+## 8.1) -- Navigate to the project directory
+WORKDIR ${PRJ_NAME_ARG}
+## 8.2 -- Remove the default example files used for Next.js Routing (These may interfere)  
+#RUN rm  src/app/* 
+RUN rm -rf src/app/* 
+## 8.3 -- Copy our template sample (pages currently) so we have a starting point for development
+RUN mkdir ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/src/components
+RUN mkdir ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/src/pages
+RUN mkdir ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/src/styles
+RUN rmdir ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/src/app
+COPY /Project-Templates/Nextjs/app-router/src/components/*.* ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/src/components
+COPY /Project-Templates/Nextjs/app-router/src/pages/*.* ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/src/pages
+COPY /Project-Templates/Nextjs/app-router/src/styles/*.* ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/src/styles
+COPY /Project-Templates/Nextjs/app-router/next.config.mjs ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/next.config.mjs
+COPY /Project-Templates/Nextjs/app-router/public/*.* ${PRJ_BASE_ARG}/${PRJ_NAME_ARG}/public/
+## 8.4 -- Make sure we have components with matching versions
+#
+#           WARNING
+#           I got the error "TypeError: dispatcher is null...." because version that did not match
+#           so the following command is essential!
+#           
+#           Note also:
+#           the last package(app-router-dom@latest) is needed to support the traditionally react router 
+#           method (for SPA, has components: BrowserRouter, Route,Switch, Link, Redirect)
+#
+# RUN npm install react@latest react-dom@latest 
+
+# npx create-next-app test1 --typescript --tailwind --src-dir --app --import-alias "@/components" --eslint
