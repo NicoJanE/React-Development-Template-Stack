@@ -6,6 +6,9 @@
 :root{
 	--font-style: normal; 	/* normal, bold*/
 	--line-thickness: 3px;	/* original intent line thickness , that's why 3px is default */
+  --nje-ident: 20px;      /* ident x pixels*/
+  --nje-vmove: -18px;     /* Move vertical pixels, - is up + down*/
+  --nje-number-of-spaces: 20px;
 }
 #content-wrapper {
   display: flex;  
@@ -106,8 +109,7 @@ a.button2 {
   display: block;
   padding: 4px 4px; 
   background-color: #3077c8;    
-  color: white; 
-  text-size:8px;
+  color: white;   
   text-decoration: none; 
   border-radius: 5px;		 /* Rounded corners */
   line-height: 13px;
@@ -129,7 +131,7 @@ h3.sq
 {	
 	font-family: "Architects Daughter", "Helvetica Neue", Helvetica, Arial, serif;
 	font-size: 16px;
-	font-weight: var(--font-style);   /* variable  style="--font-style: bold;"*/
+	font-weight: var(--font-style);   /* Usage:  style="--font-style: bold;"*/
 	color: #3077c8;    	
 	position: relative;
     display: inline-block;
@@ -233,8 +235,8 @@ a.button small {
 	padding-top: 8px; 
 	border-radius: 5px;
   overflow-x: auto; 
-	margin-left:78px;
-	margin-top:-18px;
+	margin-left:var(--nje-ident);   /* Usage:  style="--nje-ident: 40px;"   -> Default 20px; */
+	margin-top: var(--nje-vmove);   /* Usage:  style="--nje-vmove: -28px;"   -> Default -18px; */
 	margin-bottom:4px;
 	line-height: 0.3;
 
@@ -244,7 +246,7 @@ a.button small {
 	justify-content: space-between; /* Space between the code and button */   
 }
 
-.nje-cmd-multi-line{
+.nje-cmd-multi-line {
 	background-color: #2e3440; 
 	color: #FFD700; 
 	border-radius: 
@@ -260,9 +262,6 @@ a.button small {
     align-items: center;    
 	justify-content: space-between; /* Space between the code and button */    
 }
-	
-
-
 
 .nje-cmd-one-line button, .nje-cmd-multi-line button{
     background-color: #FFD700; 
@@ -299,3 +298,13 @@ a.button small {
 }
 
 */
+
+/* Call: 
+          <span class="nje-ident"></span>Text after 20(default) pixels  ( empty line or this <br> starts at begin, Works for Github not in all previews)
+          OR
+          <span class="nje-ident" style="--nje-number-of-spaces: 80px;"></span>Text after 
+*/
+.nje-ident {
+  display: inline-block;
+  width:  var(--nje-number-of-spaces);  
+}
