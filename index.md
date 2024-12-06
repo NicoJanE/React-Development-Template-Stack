@@ -52,6 +52,7 @@ This stack **contains:**
 	
 <sup>*Please see next paragraph for reference to more details configuration information </sup>
 
+> **For the first stable release, use the release/1.0 branch**
 
 
 # Where to find more information
