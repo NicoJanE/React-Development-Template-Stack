@@ -4,32 +4,65 @@ RefPages:
  - howto_create_a_dev_container
 --- 
 
+<!--
 
+Author note — custom layout and navigation (I like it, and hate it perhaps more!)
+
+This document intentionally uses a mix of Markdown and inline HTML to achieve a compact, interactive, and visually distinct layout. These choices are deliberate and will be kept, while there are a lott of thing I'm not happy with and are on my list for improvement:
+
+- Bullets are sometimes used for indentation, but the real goal is to visually group or offset code blocks and commands. This can create extra bullets, but it helps with clarity and structure.
+- Emojis are used in headings for fast visual scanning and section identification. This can complicate anchor links, so explicit HTML anchors (e.g., <a name="custom-anchor1"></a>) are added before headers to ensure reliable navigation.
+- HTML <details> sections are used to hide optional or advanced content, letting readers expand for more information as needed. This keeps the main document readable and lets users dive deeper when they want.
+- HTML details often use bullets inside for clarity, e.g., "> <small> ◉ Delete the container </small>". This is a practical workaround for presenting step-by-step or checklist items inside collapsible sections.
+- Alternative layouts (like Gist) were considered, but this format best fits the project's needs for now.
+
+Trade-offs and tips:
+- Markdown linting may flag inline HTML, spacing, or anchor usage. These are accepted for the sake of layout and navigation.
+- Anchor links: GitHub and some Markdown renderers may not generate reliable anchors for emoji headers. Use explicit <a name="..."> anchors or HTML headers with id attributes for stable links.
+- Always preview changes on GitHub (or your, local, target renderer) to confirm layout and navigation work as intended.
+
+SOLUTION for the issue
+- Create more CSS elements and make a template page in which all available elements are use. This page is a good example use case
+
+-->
 
 # What <span style="color: #409EFF; font-size: 0.6em; font-style: italic;"> -  Docker Setup & Usage Guide</span>
 
 ## 🎯 Create and Start a React Developer Container
 
-This section describes how to create and start the React developer container, which enables you to immediately begin developing your applications within the container. Since React supports various project types (SPAs, MPAs, static sites, SSR, mobile PWAs, Electron), we will gradually provide additional Docker files to extend the container. The goal is to allow you to choose a project type by selecting the corresponding **docker-compose_\*** file, which will set up the required software and provide you with a template application. <br><br>
+This section describes how to create and start the React developer container, which enables you to immediately begin developing your applications within the container. Since React supports various project types (SPAs, MPAs, static sites, SSR, mobile PWAs, Electron), we will gradually provide additional Docker files to extend the container. The goal is to allow you to choose a project type by selecting the corresponding **docker-compose_\*** file, which will set up the required software and provide you with a template application. <br>
 
->**Swarm support** <br>
-You can use this container in a Docker Swarm. This is not described here, as it is covered in the **PHP Development Template Stack**. See [here](https://nicojane.github.io/PHP-Development-Template-Stack/) check out the link ***howto_create_a_swarm***. Since you will need to follow the same procedure, please refer to that project.<br><br>
+<details>  
+  <summary class="clickable-summary">
+  <span  class="summary-icon"></span> <!-- Square Symbol -->
+  **Swarm support**{: style="color:#5491fa;font-size:13px; "}
+  </summary> <!-- On same line is failure -->
+> <small>
+>This container supports Docker Swarm. For setup instructions, refer to the **PHP Development Template Stack**. See [this guide](https://nicojane.github.io/PHP-Development-Template-Stack/) and the ***howto_create_a_swarm*** link. The procedure is identical, so use that project for details if needed. </small>
+</details>
 
+<a name="custom-anchor1"></a>
 ### 🛠️ The Basic React Container Setup
 
 This Docker React container consists of a couple of Dockerfile and Compose combinations. The first setup is needed to install Node.js, which also includes the npx program, allowing us to create a new React project. This step installs the basics, and afterward, we can run another Dockerfile/Compose combination to create the React project.
 
 **To Setup** the basic React container in docker Desktop execute this command from the **[\*Service]**  directory:  
-<pre class="nje-cmd-multi-line">
-docker-compose -f compose_nodejs_react_cont.yml up -d --build --force-recreate
-</pre>
-> *Warning!*{: style="color: red;font-size:13px; "} <br>
-> <small> When recreating the same container(service name) avoid subtle/annoying caching issues, to avoid irritation, make sure to:</small>
-> - <small> delete the container</small>
-> - <small> delete the volume and </small
-> - <small> use the Docker prune command,so: </small
-><pre class="nje-cmd-one-line-sm-ident"> docker system prune -a --volumes</pre>
->
+<pre class="nje-cmd-multi-line"> docker-compose -f compose_nodejs_react_cont.yml up -d --build --force-recreate </pre>
+
+<details>  
+  <summary class="clickable-summary">
+  <span  class="summary-icon"></span> <!-- Square Symbol -->
+   **Warning:**{: style="color: orange;font-size:15px; "} Regenerate the container
+  </summary>
+  
+  > <small> When recreating the same container (service name), avoid subtle and annoying caching issues. To prevent irritation,  make sure to: </small>  
+  > <div style="margin-left: 16px; margin-top:-20px">
+  > <small> ◉ Delete the container </small>  
+  > <small> ◉ Delete the volume  </small>  
+  > <small> ◉ Use the Docker prune command  </small>  
+  > <pre class="nje-cmd-one-line">docker system prune -a --volumes </pre>
+  > </div>
+</details>
 
 ### ✅ Setup Result
 
@@ -39,16 +72,19 @@ After running this command, you can open a terminal session in the container. By
 - In the root of the **container** a directory **'shared-host'** is available which is mapped to the **host** in the directory: **NodeReactWebService\shared-host**. Use this to exchange files or create backup of your project (Example: `cp -r /projects/nextjs/myproject /shared-host)
 
 ---
-<br>
 
 ## ⚙️ Creating React projects
 
-This section includes several Dockerfile and Docker Compose combinations that you can choose from to create a startup project. All the procedures in these subsections assume a Windows host, but you should have no trouble adapting them for a Linux host. Also you should **first** have created the basic react container as described in: ***'1.1 The Basic React Container Setup'***
+This section includes several Dockerfile and Docker Compose combinations that you can choose from to create a startup project. All the procedures in these subsections assume a Windows host, but you should have no trouble adapting them for a Linux host. Also you should **first** have created the basic react container as described in: [The Basic React Container Setup](#custom-anchor1)
 
+<details>  
+  <summary class="clickable-summary">
+  <span  class="summary-icon"></span> <!-- Square Symbol -->
+   **Warning:**{: style="color: orange;font-size:15px; "} Running NPN server
+  </summary>
 
-> *Warning!*{: style="color: red;font-size:13px; "} <br>
-> By default you can only start one NPN server with a project in a container, this means that only the last project created will be run with NPN. This can be changed using for example, **npn-run-all** or using a **Process Manager**. At the moment this is **not** part of this container stack!
-<br>
+  > <small> By default you can only start one NPN server with a project in a container, this means that only the last project created will be run with NPN. This can be changed using for example, **npn-run-all** or using a **Process Manager**. At the moment this is **not** part of this container stack! </small>
+</details>
 
 ### ⚡ creating a React project app using **CRA**
 
@@ -57,10 +93,16 @@ This type of project was declared deprecated since 2023 but is still used a lot,
 
 These day **Next.js** with (default) server page processing is preferred, this will be described in the next paragraph! 
 
-> *Note:*{: style="color: Grey;font-size:13px; "}
-> <small> The package **Next.js** (which is preferred these days) can also create a traditional React SPA.React Routing project; see paragraph 2.3 ***"Creating a React Routing Project Application using Next.js"*** <br></small>
+<details>  
+  <summary class="clickable-summary">
+  <span  class="summary-icon"></span> <!-- Square Symbol -->
+  ***Note:***{: style="color: Grey;font-size:13px; "} Traditional React
+  </summary>
 
-<br>
+  > <small> The package **Next.js** (which is preferred these days) can also create a traditional React SPA.React Routing project; see paragraph [Creating a React Routing Project Application using Next.js](#custom-anchor2)</small>
+
+</details>
+
 **Create the React application project:**
 1. Open the file: ***.env*** and choose one of the project types to use, remove the comments of one of the **PRJ_TYPE_ARG lines**
 1. In the same ***.env*** file, set the variable **'PRJ_NAME_ARG'** to a value for your project. Optional you can also set the environment variable from the command line, This value will be used for the project name and the project directory.If you omit this step the **default** will be used (see variable: **PRJ_NAME_ARG** in the ***.env*** file)
@@ -83,17 +125,22 @@ After that you can open a terminal session in your container and you should fine
 - You need to using a different **HOST PORT**? If this is required you need the change the published port in the base compose file:
   - **compose_nodejs_react_cont.yml**, stop the container and start it  with:
 
- <pre class="nje-cmd-one-line-sm-ident" style="margin-left: 40px;margin-top:-20px;margin-bottom:0px;"> docker-compose -f compose_cra_project.yml up -d </pre>
+ <pre class="nje-cmd-one-line-sm-ident" style="margin-left: 40px;margin-top:-20px;margin-bottom:15px;"> docker-compose -f compose_cra_project.yml up -d </pre>
 
-> *Warning 1*{: style="color: red;font-size:13px; "} <small>When you try to restart with Docker Desktop, it will use the old host port!</small> <br>
-> *Warning 2*{: style="color: red;font-size:13px; "}
-> <small>Make **SURE** the container port in **compose_nodejs_react_cont.yml** is the SAME as in *.env* (/projects/prjtype/[your projects]) otherwise it will **FAIL!!**</small>
-<br>
->
-> *Limitation!*{: style="color:purple;font-size:13px; "}
-> <small>Currently, it is not possible to successfully run this Docker/Compose coordination multiple times with different project names (which was, and still is, the intention). When running it a second time, it creates a new, empty project. I believe this issue is related to Docker **caching** and the **nxp** command.<br> 
-> **Possible workaround** you could try to execute the following command in the projects directory of the container: </small>
-> <pre class="nje-cmd-one-line-sm-ident"> npx create-react-app /projects/prjtype/default_project_name --template cra-template</pre>
+ <details>  
+  <summary class="clickable-summary" style="margin-left: 40px;margin-top:0px;margin-bottom:-20px;">
+  <span  class="summary-icon"></span> <!-- Square Symbol -->
+   **Warnings:**{: style="color: orange;font-size:15px; "} Ports
+  </summary>
+
+  > **Warning 1**{: style="color: orange;font-size:13px; "} <small>When you try to restart with Docker Desktop, it will use the old host port!</small>  
+  > **Warning 2**{: style="color: orange;font-size:13px; "}  <small>Make **SURE** the container port in **compose_nodejs_react_cont.yml** is the SAME as in *.env* (/projects/prjtype/[your projects]) otherwise it **fails**
+  >
+  > **Limitation!**{: style="color:purple;font-size:13px; "}
+  > <small>Currently, it is not possible to successfully run this Docker/Compose coordination multiple times with different project names (which was, and still is, the intention). When running it a second time, it creates a new, empty project. I believe this issue is related to Docker **caching** and the **nxp** command.<br> 
+  > **Possible workaround** you could try to execute the following command in the projects directory of the container: </small>
+  > <pre class="nje-cmd-one-line-sm-ident" style="margin-left: 1px;margin-top:-20px;margin-bottom:0px;" >npx create-react-app /projects/prjtype/default_project_name --template cra-template</pre>
+</details>
 
 - In **.env** file in the new directory, make sure to update the container port (should be different than other project) After that start the application with:
 
@@ -114,13 +161,15 @@ When creating a new application this should be the default choice, unless you ha
 
 1. In the 'NodeReactWebService' sub directory open the file **'.env'** in that file set:
    - Choose a unique port, this will be used for the container as well as for the host! 
-	<pre class="nje-cmd-one-line-sm-ident"> PORT=3098</pre>
+   <pre class="nje-cmd-one-line-sm-ident"> PORT=3098</pre>
    - Update the target project name 
-	<pre class="nje-cmd-one-line-sm-ident"> PRJ_NAME_ARG_NEXT=my-project </pre>
+   <pre class="nje-cmd-one-line-sm-ident"> PRJ_NAME_ARG_NEXT=my-project </pre>
 1. Execute the following:
 <pre class="nje-cmd-one-line-sm-ident">
 docker  compose -f compose_nextjs_cust_project.yml up -d  --remove-orphans --build --force-recreate 
 </pre>
+
+<br>
 
 #### ✅ Setup result & possible customization's
 
@@ -129,8 +178,10 @@ docker  compose -f compose_nextjs_cust_project.yml up -d  --remove-orphans --bui
 <pre class="nje-cmd-one-line-sm-ident">  http://localhost:3098/ </pre>
 
 - In case something seems to be off first try to restart the Docker container!
-<br><br>
 
+---
+
+<a name="custom-anchor2"></a>
 ### ⚡ Creating a React Routing Project App using **Next.js**
 
 Since 2023, this is the preferred method for creating projects. In this Docker/Compose combination, we will create a project using the traditional React Routing method (the same as in 2.1 using the CRA method). However, this time we will use our own template. Because the Next.js environment does not support the React Routing method (which is characterized by rendering on the client side, while Next.js renders by default on the server), we may need to make some necessary changes in the **ClientRouter.js** file, where you should add your other **Link** and **Route** definitions.
@@ -139,12 +190,12 @@ Since 2023, this is the preferred method for creating projects. In this Docker/C
 
 1. In the 'NodeReactWebService' sub directory open the file **'.env'** in that file set:
    - Choose a unique port, this will be used for the container as well as for the host! 
-	<pre class="nje-cmd-one-line-sm-ident"> PORT=3098	</pre>
+   <pre class="nje-cmd-one-line-sm-ident"> PORT=3098	</pre>
    -  Update the target project name 
-	<pre class="nje-cmd-one-line-sm-ident"> PRJ_NAME_ARG_NEXT=my-project </pre>
+   <pre class="nje-cmd-one-line-sm-ident"> PRJ_NAME_ARG_NEXT=my-project </pre>
 1. Execute the following:
 <pre class="nje-cmd-one-line-sm-ident">
-docker  compose -f compose_nextjs_cust_cra_project.yml up -d  --remove-orphans --build --force-recreate 
+docker  compose -f compose_nextjs_cust_cra_project.yml up -d  --remove-orphans --build --force-recreate
 </pre>
 
 #### ✅ Setup result & possible customization's
@@ -245,8 +296,16 @@ We have provide already a **'settings.json'** file with relevant settings in the
 - if the project directory is not opened automatically, choose: **'Open folder'** and select the folder ***/projects***
   - optional you can select the folder: ***/projects[type][project name]*** if you know the name of your project.
 
-Note 1 that changes my in the code are direct updated in the web page, if it is open (auto update)
-Note 2 also that you can download the project to your host as a Backup, this download can be restored with the restore Docker compose file, **but** when using this download as restore make sure the **node_modules** is removed(this will be regenerated during restore) and also the **.next**(don't remove **.vscode**) See the paragraph 'Backup and restore project' in this document for more instructions and an alternative method of backup the project.
+<details>  
+  <summary class="clickable-summary">
+  <span  class="summary-icon"></span> <!-- Square Symbol -->
+   **Notes:**{: style="color: orange;font-size:15px; "} live reload and backup & restore
+  </summary>
+  > <div style="margin-left: 16px; margin-top:-20px">
+  > <small> ◉ Changes you make in the code are applied immediately to the running site (live reload), if the site is open in your browser. </small>  
+  > <small> ◉ Backup & restore: You can download the project to the host and restore it with the Docker restore compose. Before restoring, delete the project’s node_modules and .next directories (they will be regenerated during restore). Do not remove the .vscode folder. See the "Backup and restore project" section for full instructions.  </small>  
+  > </div>
+</details>
 
 <span style="color: #6d757dff; font-size: 10px; font-style: italic;"> <br>
 This file is part of: **React Development Template Stack**
