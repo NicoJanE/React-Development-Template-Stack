@@ -16,6 +16,7 @@ You can use this container to begin programming in your local environment for de
 - The introduction, with a **quick setup** page can be found [here](https://nicojane.github.io/React-Development-Template-Stack/). 
 - Direct link to the full setup page, can be found  Other DTS containers can be found [here](https://nicojane.github.io/React-Development-Template-Stack/Howtos/howto_create_a_dev_container)
 
+<br>
 <p align="center">
   <a href="https://nicojane.github.io/Docker-Template-Stacks-Home/">
     <img src="assets/images/DTSfooter.svg" alt="DTS Template Stacks" width="400" />
