@@ -22,8 +22,8 @@ You can use this container to begin programming in your local environment for de
   </a>
 </p>
 
-<small><small><small>
-This file is part of:  **React Development Template Stack**
+<sub> This file is part of:  React Development Template Stack
 Copyright (c) 2025 Nico Jan Eelhart. This source code is licensed under the MIT License found in the  'LICENSE.md' file in the root directory of this source tree.
-</small></small></small>
-<center>─── ✦ ───</center>
+</sub>
+
+<p align="center">─── ✦ ───</p>
