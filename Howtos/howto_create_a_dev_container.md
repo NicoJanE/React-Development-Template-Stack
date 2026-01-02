@@ -26,9 +26,11 @@ SOLUTION for the issue
 
 -->
 
-# What <span style="color: #409EFF; font-size: 0.6em; font-style: italic;"> -  Docker Setup & Usage Guide</span>
+# React Developer Container <span style="color: #409EFF; font-size: 0.6em; font-style: italic;"> -  Docker Setup & Usage Guide</span>
 
-## 🎯 Create and Start a React Developer Container
+![MIT License](https://img.shields.io/badge/License-MIT-green) ![Commercial Services Available](https://img.shields.io/badge/Services-Optional-blue)
+
+## 🎯 Introduction
 
 This section describes how to create and start the React developer container, which enables you to immediately begin developing your applications within the container. Since React supports various project types (SPAs, MPAs, static sites, SSR, mobile PWAs, Electron), we will gradually provide additional Docker files to extend the container. The goal is to allow you to choose a project type by selecting the corresponding **docker-compose_\*** file, which will set up the required software and provide you with a template application. <br>
 
@@ -306,9 +308,11 @@ We have provide already a **'settings.json'** file with relevant settings in the
   > <small> ◉ Backup & restore: You can download the project to the host and restore it with the Docker restore compose. Before restoring, delete the project’s node_modules and .next directories (they will be regenerated during restore). Do not remove the .vscode folder. See the "Backup and restore project" section for full instructions.  </small>  
   > </div>
 </details>
+<br>
 
-<span style="color: #6d757dff; font-size: 10px; font-style: italic;"> <br>
-This file is part of: **React Development Template Stack**
-Copyright (c) 2025 Nico Jan Eelhart. This source code is licensed under the MIT License found in the  'LICENSE.md' file in the root directory of this source tree.</span>
+<span style="color: #6d757dff; font-size: 13px; font-style: italic;">
+<i><b>License</b><br>This file is part of: **React Development Template Stack**  Copyright (c) 2025-2026 Nico Jan Eelhart.This repository is [MIT licensed](../MIT-license.md) and free to use. For optional commercial support, customization, training, or long-term maintenance, see [COMMERCIAL.md](../COMMERCIAL.md).</i>
+</span>
 
+<br><br>
 <center>─── ✦ ───</center>
